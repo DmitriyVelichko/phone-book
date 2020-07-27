@@ -1,0 +1,12 @@
+{
+  "autoload": {
+    "psr-4": {
+      "core\\": "core/",
+      "ctrls\\": "controllers/",
+      "modls\\": "models/"
+    }
+  },
+  "require": {
+    "ext-pdo": "*"
+  }
+}
