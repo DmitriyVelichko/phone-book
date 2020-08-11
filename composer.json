@@ -3,10 +3,12 @@
     "psr-4": {
       "core\\": "core/",
       "ctrls\\": "controllers/",
-      "modls\\": "models/"
+      "modls\\": "models/",
+      "helps\\": "helpers/"
     }
   },
   "require": {
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-json": "*"
   }
 }

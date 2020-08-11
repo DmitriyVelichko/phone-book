@@ -1,0 +1,109 @@
+body {
+    background: dimgray;
+}
+
+#register {
+    border: 1px solid black;
+    margin: 0 auto;
+    padding: 30px;
+    width: max-content;
+    background: white;
+    border-radius: 25px;
+}
+
+#auth {
+    border: 1px solid black;
+    margin: 0 auto;
+    padding: 30px;
+    width: max-content;
+    background: white;
+    border-radius: 25px;
+}
+
+.error {
+    color: red;
+}
+
+.question {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    font-size: 20px;
+    vertical-align: top;
+}
+.question:before, .question:after {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+.question:before {
+    content: attr(data-tooltip);
+    position: absolute; bottom: 110%; left: 50%;
+    margin-bottom: 5px;
+    margin-left: -80px;
+    padding: 7px;
+    width: 160px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #E7E2E2;
+    color: #000;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+}
+.question:after {
+    content:" ";
+    position: absolute; bottom: 110%; left: 50%;
+    margin-left: -5px;
+    width: 0;
+    border-top: 5px solid #E7E2E2;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    font-size: 0;
+    line-height: 0;
+}
+.question:hover:before, .question:hover:after {
+    visibility: visible;
+    opacity: 1;
+}
+
+.userName {
+    float: left;
+    background: white;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+thead {
+    background: wheat;
+}
+tbody {
+    background: white;
+}
+th, td {
+    border: 1px solid #000;
+    padding: 5px;
+}
+td:nth-child(2) {
+    text-align: right;
+}
+
+.mythead {
+    background: wheat;
+    font-weight: bold;
+}
+
+.myth {
+    border-right: 1px solid black;
+}
+
+.mytr {
+    background: white;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+}
