@@ -9,7 +9,7 @@
     <meta name="author" content="PhoneBook">
 
     <link rel="stylesheet" href="/lib/bootstrap-4.1.3-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css?<?=time()?>">
     <link href="/lib/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet">
 
     <link href="/lib/fontawesome-free-5.14.0-web/css/fontawesome.css" rel="stylesheet">
@@ -42,7 +42,7 @@
 <script src="/js/jquery351.js"></script>
 <script src="/lib/bootstrap-4.1.3-dist/js/popper.min.js"></script>
 <script src="/lib/bootstrap-4.1.3-dist/js/bootstrap.js"></script>
-<script type="application/javascript" src="/js/main.js"></script>
+<script type="application/javascript" src="/js/main.js?<?=time()?>"></script>
 <script defer src="/lib/fontawesome-free-5.14.0-web/js/all.js"></script>
 <script defer src="/lib/fontawesome-free-5.14.0-web/js/brands.js"></script>
 <script defer src="/lib/fontawesome-free-5.14.0-web/js/solid.js"></script>

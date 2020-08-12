@@ -19,7 +19,30 @@ class BookController
 
     public function insert($data)
     {
-        $this->model->insert($data);
+        if($data['insContact']){
+            $_POST['ajax'] = 1;
+        }
+        if (isset($_FILES['files']['name'][0])) {
+            $path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/';
+
+            $inputName = $_FILES['files']['name'][0];
+
+            if (!is_dir($path)) {
+                mkdir($path, 0777, true);
+            }
+            move_uploaded_file($_FILES['files']['tmp_name'][0], $path . $inputName);
+
+            $data['photo'] = $inputName;
+        }
+
+        $this->model->insert([
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'phone' => $data['photo'],
+            'email' => $data['email'],
+            'photo' => $data['photo'],
+        ]);
+        $this->view('document', $data);
     }
 
     public function delete($data)
@@ -45,7 +68,8 @@ class BookController
     public function view($template, $args)
     {
         if ($_POST['ajax']) {
-            echo json_encode($args); die;
+            echo json_encode($args);
+            die;
         }
         echo ViewHelper::render($template, $args);
     }

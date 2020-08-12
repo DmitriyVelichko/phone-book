@@ -14,7 +14,13 @@ class BookModel
     {
         $this->db = (new MainModel())->connect();
     }
-
+    public function findById($id)
+    {
+        $sth = $this->db->prepare("SELECT * FROM `book` WHERE `id` = ?");
+        $sth->execute(array($id));
+        $value = $sth->fetch(PDO::FETCH_ASSOC);
+        return $value;
+    }
     public function insert(array $data)
     {
         try {
@@ -62,7 +68,8 @@ class BookModel
     {
         $sth = $this->db->prepare("SELECT * FROM book");
         $sth->execute();
-        return $sth->fetchAll();
+        $value = $sth->fetchAll(PDO::FETCH_ASSOC);
+        return $value;
     }
 
     public function prepareData($stmt, $data)

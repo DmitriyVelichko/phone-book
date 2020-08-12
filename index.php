@@ -26,7 +26,11 @@ if (empty($_SESSION['login'])) {
     }
 } else {
     $controller = 'book';
-    $action = 'findAll';
+    if($_POST['insContact']){
+        $action = 'insert';
+    } else {
+        $action = 'findAll';
+    }
 }
 
 $controllers = CatalogHelper::getFiles("controllers");

@@ -1,20 +1,31 @@
+<? foreach ($content as $key => $item) {?>
 <div class="row mytbody">
     <div class="col-sm mytr">
-        1
+        <?=$item['first_name']?>
     </div>
     <div class="col-sm mytr">
-        Иван
+        <?=$item['last_name']?>
     </div>
     <div class="col-sm mytr">
-        Иванов
+        <?=$item['phone']?>
     </div>
     <div class="col-sm mytr">
-        8(999)888-77-44
+        <?=$item['email']?>
     </div>
     <div class="col-sm mytr">
-        ivanov.ivan@test.ru
+        <div class="image__wrapper">
+            <img id="image2" src="/uploads/<?=$item['photo']?>" class="minimized" alt="клик для увеличения"/>
+        </div>
     </div>
     <div class="col-sm mytr">
-        Фото-ivan
+        <div class="showhim" data-itemid="<?=$item['id']?>" id="tbodyedit">
+            <div class="showme"><i class="far fa-edit"></i></div>
+            <div class="ok"><i class="fas fa-edit"></i></div>
+        </div>
+        <div class="showhim" data-itemid="<?=$item['id']?>" id="tbodytrash">
+            <div class="showme"><i class="far fa-trash-alt"></i></div>
+            <div class="ok"><i class="fas fa-trash-alt"></i></div>
+        </div>
     </div>
 </div>
+<? } ?>
