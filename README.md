@@ -34,3 +34,33 @@ MVC-подход (разделение как минимум на контрол
 Файл db-structure.sql
 PHP файлы
 Сколько времени было потрачено на выполнение задания?
+
+
+CREATE TABLE `book` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`first_name` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`last_name` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`phone` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`email` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`photo` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`user_id` INT(11) NOT NULL,
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `user_id` (`user_id`) USING BTREE,
+	CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `phone_book`.`users` (`id`) ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=11
+;
+
+
+CREATE TABLE `users` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`login` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`pass` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=20
+;
