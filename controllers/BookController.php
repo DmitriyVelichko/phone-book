@@ -9,17 +9,17 @@ use modls\UsersModel;
 class BookController
 {
     public $model;
-    public $users;
+    public $user;
 
     public function __construct(BookModel $book)
     {
         $this->model = $book;
-        $this->users = new UsersModel();
+        $this->user = !empty($_SESSION['login']) ? (new UsersModel())->findByLogin($_SESSION['login']) : null;
     }
 
     public function insert($data)
     {
-        if($data['insContact']){
+        if ($data['insContact']) {
             $_POST['ajax'] = 1;
         }
         if (isset($_FILES['files']['name'][0])) {
@@ -35,34 +35,37 @@ class BookController
             $data['photo'] = $inputName;
         }
 
-        $this->model->insert([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'phone' => $data['photo'],
-            'email' => $data['email'],
-            'photo' => $data['photo'],
-        ]);
+        if (!empty($_POST['id'])) {
+            $arr = [
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'phone' => $data['photo'],
+                'email' => $data['email'],
+            ];
+            if (!empty($data['photo'])) {
+                $arr['photo'] = $data['photo'];
+            }
+            $this->model->update((int)$_POST['id'], (int)$this->user['id'], $arr);
+        } else {
+            $this->model->insert((int)$this->user['id'], [
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'photo' => $data['photo'],
+            ]);
+        }
+
         $this->view('document', $data);
-    }
-
-    public function delete($data)
-    {
-        $this->model->delete($data);
-    }
-
-    public function update($id, $data)
-    {
-        $this->model->update($id, $data);
     }
 
     public function findAll()
     {
-        $data['book'] = true;
-        $content = $this->model->findAll();
-        $data['content'] = $content;
-        $user = $this->users->findByLogin($_SESSION['login']);
-        $data['userName'] = $user['login'];
-        $this->view('document', $data);
+        $this->view('document', [
+            'book' => true,
+            'content' => $this->model->findAll((int)$this->user['id']),
+            'userName' => $this->user['login']
+        ]);
     }
 
     public function view($template, $args)

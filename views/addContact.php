@@ -2,12 +2,13 @@
     <p>Добавить контакт</p>
     <span id="myModal__close" class="close">ₓ</span>
 
-    <form action="?" method="post" enctype="multipart/form-data">
+    <form action="?" method="post" enctype="multipart/form-data" id="modalAddContact">
         <div class="row">
             <div class="col-sm">
                 <label for="first_name">Имя</label>
             </div>
             <div class="col-sm">
+                <input type="text" id="id" name="id" value="" style="display: none">
                 <input type="text" id="first_name" name="first_name" value="">
             </div>
         </div>
@@ -53,7 +54,7 @@
         <div class="row">
             <div class="col-sm">
                 <input type="hidden" id="insContact" name="insContact" value="1">
-                <input type="submit" id="addContact" name="addContact" value="Добавить">
+                <input type="submit" id="addContact" name="addContact" value="Сохранить">
             </div>
         </div>
 

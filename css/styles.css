@@ -380,7 +380,14 @@ a {
     animation-iteration-count: 1;
 }
 
-#image2 {
+.image2 {
     width: 160px;
     height: 80px;
+}
+
+.mytr input[type=text] {
+    border:none;
+    background:none;
+    outline:none;
+    padding:0;
 }
