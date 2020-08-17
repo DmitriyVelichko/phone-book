@@ -15,6 +15,13 @@ class BookModel
         $this->db = (new MainModel())->connect();
     }
 
+    public function findById($id)
+    {
+        $sth = $this->db->prepare("SELECT * FROM `book` WHERE `id` = ?");
+        $sth->execute(array($id));
+        $value = $sth->fetch(PDO::FETCH_ASSOC);
+        return $value;
+    }
     public function insert($userId, $data)
     {
         try {
@@ -23,7 +30,7 @@ class BookModel
             $stmt->bindParam(":user_id", $userId, PDO::PARAM_INT);
             $stmt = $this->prepareData($stmt, $data);
             $stmt->execute();
-            return true;
+            return $this->findById($this->db->lastInsertId());
         } catch (Exception $e) {
             echo 'Code: ' . $e->getCode() . '| Message: ' . $e->getMessage();
             return false;
@@ -39,7 +46,7 @@ class BookModel
             $stmt->bindParam(":user_id", $userId, PDO::PARAM_INT);
             $stmt = $this->prepareData($stmt, $data);
             $stmt->execute();
-            return true;
+            return $this->findById($id);
         } catch (Exception $e) {
             echo 'Code: ' . $e->getCode() . '| Message: ' . $e->getMessage();
             return false;
@@ -54,7 +61,7 @@ class BookModel
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmt->bindParam(":user_id", $userId, PDO::PARAM_INT);
             $stmt->execute();
-            return true;
+            return $id;
         } catch (Exception $e) {
             echo 'Code: ' . $e->getCode() . '| Message: ' . $e->getMessage();
             return false;
@@ -73,21 +80,11 @@ class BookModel
 
     public function prepareData($stmt, $data)
     {
-        if (!empty($data['first_name'])) {
-            $stmt->bindParam(":first_name", $data['first_name'], PDO::PARAM_STR);
-        }
-        if (!empty($data['last_name'])) {
-            $stmt->bindParam(":last_name", $data['last_name'], PDO::PARAM_STR);
-        }
-        if (!empty($data['phone'])) {
-            $stmt->bindParam(":phone", $data['phone'], PDO::PARAM_STR);
-        }
-        if (!empty($data['email'])) {
-            $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
-        }
-        if (!empty($data['photo'])) {
-            $stmt->bindParam(":photo", $data['photo'], PDO::PARAM_STR);
-        }
+        $stmt->bindParam(":first_name", $data['first_name'], PDO::PARAM_STR);
+        $stmt->bindParam(":last_name", $data['last_name'], PDO::PARAM_STR);
+        $stmt->bindParam(":phone", $data['phone'], PDO::PARAM_STR);
+        $stmt->bindParam(":email", $data['email'], PDO::PARAM_STR);
+        $stmt->bindParam(":photo", $data['photo'], PDO::PARAM_STR);
         return $stmt;
     }
 }

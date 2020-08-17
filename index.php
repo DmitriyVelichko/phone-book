@@ -28,7 +28,11 @@ if (empty($_SESSION['login'])) {
     $controller = 'book';
     if($_POST['insContact']){
         $action = 'insert';
-    } else {
+    }
+    elseif ($_POST['removeItem']) {
+        $action = 'removeItem';
+    }
+    else {
         $action = 'findAll';
     }
 }

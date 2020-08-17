@@ -35,28 +35,37 @@ class BookController
             $data['photo'] = $inputName;
         }
 
+        $arr = [
+            'first_name' => !empty($data['first_name']) ? $data['first_name'] : '',
+            'last_name' => !empty($data['last_name']) ? $data['last_name'] : '',
+            'phone' => !empty($data['phone']) ? $data['phone'] : '',
+            'email' => !empty($data['email']) ? $data['email'] : '',
+            'photo' => !empty($data['photo']) ? $data['photo'] : '',
+        ];
+
         if (!empty($_POST['id'])) {
-            $arr = [
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'phone' => $data['photo'],
-                'email' => $data['email'],
-            ];
-            if (!empty($data['photo'])) {
-                $arr['photo'] = $data['photo'];
-            }
-            $this->model->update((int)$_POST['id'], (int)$this->user['id'], $arr);
+            $item = $this->model->update((int)$_POST['id'], (int)$this->user['id'], $arr);
         } else {
-            $this->model->insert((int)$this->user['id'], [
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'phone' => $data['phone'],
-                'email' => $data['email'],
-                'photo' => $data['photo'],
-            ]);
+            $item = $this->model->insert((int)$this->user['id'], $arr);
         }
 
-        $this->view('document', $data);
+        $this->view('document', [
+            'id' => $item['id'],
+            'first_name' => $item['first_name'],
+            'last_name' => $item['last_name'],
+            'phone' => $item['phone'],
+            'email' => $item['email'],
+            'photo' => $item['photo'],
+            'newContact' => (bool)$data['newContact']
+        ]);
+    }
+
+    public function removeItem()
+    {
+        $id = $this->model->delete($_POST['id'], (int)$this->user['id']);
+        $this->view('document', [
+            'id' => $id,
+        ]);
     }
 
     public function findAll()

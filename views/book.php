@@ -18,30 +18,32 @@
             </div>
         </div>
 
-        <div class="row mythead">
-            <div class="col-sm myth">
-                Имя
+        <div class="mytable">
+            <div class="row mythead">
+                <div class="col-sm myth">
+                    Имя
+                </div>
+                <div class="col-sm myth">
+                    Фамилия
+                </div>
+                <div class="col-sm myth">
+                    Телефон
+                </div>
+                <div class="col-sm myth">
+                    Email
+                </div>
+                <div class="col-sm myth">
+                    Фото-записи
+                </div>
+                <div class="col-sm myth">
+                    Редактировать
+                </div>
             </div>
-            <div class="col-sm myth">
-                Фамилия
-            </div>
-            <div class="col-sm myth">
-                Телефон
-            </div>
-            <div class="col-sm myth">
-                Email
-            </div>
-            <div class="col-sm myth">
-                Фото-записи
-            </div>
-            <div class="col-sm myth">
-                Редактировать
-            </div>
+            <?
+            if(!empty($content)) {
+                include('mytbody.php');
+            }
+            ?>
         </div>
-        <?
-        if(!empty($content)) {
-            include('mytbody.php');
-        }
-        ?>
     </div>
 </div>

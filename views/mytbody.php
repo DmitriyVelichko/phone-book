@@ -1,5 +1,5 @@
 <? foreach ($content as $key => $item) {?>
-<div class="row mytbody">
+<div class="row mytbody" id="mytbody<?=$item['id']?>">
     <div class="col-sm mytr">
         <input type="text" value="<?=$item['id']?>" style="display: none">
         <input type="text" value="<?=$item['first_name']?>" readonly>
@@ -14,9 +14,16 @@
         <input type="text" value="<?=$item['email']?>" readonly>
     </div>
     <div class="col-sm mytr">
-        <input type="text" value="<?=$item['photo']?>" style="display: none">
+        <input type="text" class="bodyImageName" value="<?=$item['photo']?>" style="display: none">
         <div class="image__wrapper">
-            <img src="/uploads/<?=$item['photo']?>" class="minimized image2" alt="клик для увеличения"/>
+            <img <?if(!empty($item['photo'])):?>
+                    src="/uploads/<?=$item['photo']?>"
+                <?else:?>
+                    src="/uploads/no_photo.jpg"
+                    style="width: 1px; height: 1px;"
+                <?endif;?>
+                    class="minimized bodyImage"
+            />
         </div>
     </div>
     <div class="col-sm mytr">
