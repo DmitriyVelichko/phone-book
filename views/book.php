@@ -20,30 +20,44 @@
 
         <div class="mytable">
             <div class="row mythead">
-                <div class="col-sm myth">
+                <div class="col-sm myth" data-field="trfirstname">
                     Имя
+                    <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort-up" hidden></i>
+                    <i class="fas fa-sort-down" hidden></i>
                 </div>
-                <div class="col-sm myth">
+                <div class="col-sm myth" data-field="trlastname">
                     Фамилия
+                    <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort-up" hidden></i>
+                    <i class="fas fa-sort-down" hidden></i>
                 </div>
-                <div class="col-sm myth">
+                <div class="col-sm myth" data-field="trphone">
                     Телефон
+                    <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort-up" hidden></i>
+                    <i class="fas fa-sort-down" hidden></i>
                 </div>
-                <div class="col-sm myth">
+                <div class="col-sm myth" data-field="tremail">
                     Email
+                    <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort-up" hidden></i>
+                    <i class="fas fa-sort-down" hidden></i>
                 </div>
-                <div class="col-sm myth">
+                <div class="col-sm myth" data-field="trphoto">
                     Фото-записи
                 </div>
-                <div class="col-sm myth">
+                <div class="col-sm myth" data-field="trbuttons">
                     Редактировать
                 </div>
             </div>
-            <?
-            if(!empty($content)) {
-                include('mytbody.php');
-            }
-            ?>
+            <div class="dinamicalBody">
+                <?
+                if(!empty($content)) {
+                    include('mytbody.php');
+                }
+                ?>
+            </div>
         </div>
     </div>
 </div>
