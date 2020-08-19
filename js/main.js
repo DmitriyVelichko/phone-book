@@ -346,30 +346,34 @@ $(document).ready(function () {
 
         //Условие, все поля кроме фото и кнопок
         if (typeof upJQObject.get(0) !== "undefined") {
-            if (downJQObject.attr('hidden') === 'hidden') {
+            if (upJQObject.attr('hidden') === 'hidden') {
                 //Если вниз не видна, то показываем
                 removeAllSortArrow(event);
 
-                downJQObject.removeAttr('hidden');//Показываем вниз
-                upJQObject.attr('hidden', true);//Скрываем вверх
+                upJQObject.removeAttr('hidden');//Показываем вниз
+                downJQObject.attr('hidden', true);//Скрываем вверх
 
-                order = 'desc'
+                order = 'asc'
             } else {
                 //иначе показываем вверх и вниз скрываем
                 removeAllSortArrow(event)
 
-                upJQObject.removeAttr('hidden');//Показываем вверх
-                downJQObject.attr('hidden', true);//скрываем вниз
+                downJQObject.removeAttr('hidden');//Показываем вверх
+                upJQObject.attr('hidden', true);//скрываем вниз
 
-                order = 'asc'
+                order = 'desc'
             }
             $(event.target.closest('.myth')).addClass('active');
             document.querySelector('.active').setAttribute('data-order', order);
             let dataAttrib = document.querySelector('.active').getAttribute('data-field');
             let elements = $('.' + dataAttrib).find('input');
-
+            let valElem;
             elements.each(function (index, value) {
-                $(value).closest('.mytbody').attr('data-sort', $(value).val());
+                valElem = $(value).val();
+                if($('.active').attr('data-field') === 'trphone') {
+                    valElem = $(value).val().replace(/\D+/g,"");
+                }
+                $(value).closest('.mytbody').attr('data-sort', valElem);
             })
 
             sortBodyElements(order);
