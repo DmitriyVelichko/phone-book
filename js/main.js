@@ -195,8 +195,27 @@ $(document).ready(function () {
             processData: false,
             success: function (response) {
                 let mytbody = $.parseJSON(response);
-                let template = "<div data-sort=\"" + mytbody.id + "\" class=\"row mytbody\" id=\"mytbody" + mytbody.id + "\">\n" +
-                    "    <div class=\"col-sm mytr trid\" hidden>\n" +
+                let dataSort;
+                switch ($('.active').attr('data-field')) {
+                    case 'trfirstname':
+                        dataSort = mytbody.first_name;
+                        break;
+                    case 'trlastname':
+                        dataSort = mytbody.last_name;
+                        break;
+                    case 'trphone':
+                        dataSort = mytbody.phone;
+                        break;
+                    case 'tremail':
+                        dataSort = mytbody.email;
+                        break;
+                    default:
+                        dataSort = mytbody.id;
+                        break;
+                }
+
+                let template = "<div class=\"row mytbody\" id=\"mytbody" + mytbody.id + "\" data-sort=\"" + dataSort + "\">\n" +
+                    "    <div class=\"col-sm mytr trid\" style=\"max-width: 71px\">\n" +
                     "        <input type=\"text\" value=\"" + mytbody.id + "\">\n" +
                     "    </div>\n" +
                     "    <div class=\"col-sm mytr trfirstname\">\n" +
@@ -230,6 +249,7 @@ $(document).ready(function () {
                     "</div>";
                 if (newContact) {
                     $('.mytable').append(template);
+                    sortBodyElements();
                 } else {
                     let arr3 = $('#mytbody' + mytbody.id).find('.mytr input');
                     let arr4 = [mytbody.id, mytbody.first_name, mytbody.last_name, mytbody.phone, mytbody.email, mytbody.photo];
@@ -339,6 +359,7 @@ $(document).ready(function () {
         method: "HEAD"
     });
 
+    //Сортировка
     $(document).on('click', '.myth', function (event) {
         let upJQObject = $($(event.target.closest('.myth')).find('.fa-sort-up').get(0));
         let downJQObject = $($(event.target.closest('.myth')).find('.fa-sort-down').get(0));

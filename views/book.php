@@ -20,6 +20,12 @@
 
         <div class="mytable">
             <div class="row mythead">
+                <div class="col-sm myth" data-field="trid" style="max-width: 71px">
+                    №
+                    <i class="fas fa-sort"></i>
+                    <i class="fas fa-sort-up" hidden></i>
+                    <i class="fas fa-sort-down" hidden></i>
+                </div>
                 <div class="col-sm myth" data-field="trfirstname">
                     Имя
                     <i class="fas fa-sort"></i>

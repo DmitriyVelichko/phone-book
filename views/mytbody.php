@@ -1,6 +1,6 @@
 <? foreach ($content as $key => $item) {?>
 <div class="row mytbody" id="mytbody<?=$item['id']?>" data-sort="<?=$item['id']?>">
-    <div class="col-sm mytr trid" hidden>
+    <div class="col-sm mytr trid" style="max-width: 71px">
         <input type="text" value="<?=$item['id']?>">
     </div>
     <div class="col-sm mytr trfirstname">
