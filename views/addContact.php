@@ -25,7 +25,7 @@
                 <label for="phone">Телефон</label>
             </div>
             <div class="col-sm">
-                <input type="text" id="phone" name="phone" value="">
+                <input type="tel" id="phone" name="phone" value="" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" placeholder="8(___)-___-__-__">
             </div>
         </div>
         <div class="row">
@@ -33,7 +33,7 @@
                 <label for="email">Email</label>
             </div>
             <div class="col-sm">
-                <input type="text" id="email" name="email" value="">
+                <input type="text" id="email" name="email" value="" placeholder="_@_._">
             </div>
         </div>
 

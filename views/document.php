@@ -40,6 +40,8 @@
 </div>
 
 <script src="/js/jquery351.js"></script>
+<script src="/lib/maskedinput/src/jquery.maskedinput.js"></script>
+<script src="/lib/inputmask.js"></script>
 <script src="/lib/bootstrap-4.1.3-dist/js/popper.min.js"></script>
 <script src="/lib/bootstrap-4.1.3-dist/js/bootstrap.js"></script>
 <script type="application/javascript" src="/js/main.js?<?=time()?>"></script>

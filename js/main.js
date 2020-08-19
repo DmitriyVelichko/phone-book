@@ -196,6 +196,7 @@ $(document).ready(function () {
             success: function (response) {
                 let mytbody = $.parseJSON(response);
                 let dataSort;
+                let mytbodyid;
                 switch ($('.active').attr('data-field')) {
                     case 'trfirstname':
                         dataSort = mytbody.first_name;
@@ -213,10 +214,10 @@ $(document).ready(function () {
                         dataSort = mytbody.id;
                         break;
                 }
-
+                mytbodyid = ($('.mytbody').length > 0) ? $('.mytbody').length + 1 : 1;
                 let template = "<div class=\"row mytbody\" id=\"mytbody" + mytbody.id + "\" data-sort=\"" + dataSort + "\">\n" +
-                    "    <div class=\"col-sm mytr trid\" style=\"max-width: 71px\">\n" +
-                    "        <input type=\"text\" value=\"" + mytbody.id + "\">\n" +
+                    "    <div class=\"col-sm mytr trid\" style=\"max-width: 71px\">\n"+ mytbodyid +
+                    "        <input type=\"text\" value=\"" + mytbody.id + "\" hidden>\n" +
                     "    </div>\n" +
                     "    <div class=\"col-sm mytr trfirstname\">\n" +
                     "        <input type=\"text\" value=\"" + mytbody.first_name + "\" readonly>\n" +
@@ -389,17 +390,22 @@ $(document).ready(function () {
             let dataAttrib = document.querySelector('.active').getAttribute('data-field');
             let elements = $('.' + dataAttrib).find('input');
             let valElem;
+            //Это перебор столбика инпутов. Нужно заменить дата атрибуты если изменилось поле сортировки
             elements.each(function (index, value) {
                 valElem = $(value).val();
                 if($('.active').attr('data-field') === 'trphone') {
+                    //Сортировка для телефона (нужно удалить скобочки и другие символы)
                     valElem = $(value).val().replace(/\D+/g,"");
                 }
-                $(value).closest('.mytbody').attr('data-sort', valElem);
+                $(value).closest('.mytbody').attr('data-sort', valElem);//Меняю дата атрибут, так как по нему сортирую
             })
 
             sortBodyElements(order);
         }
     });
+
+    $("#phone").mask("8(999)999-99-99");
+    $("#email").inputmask("email");
 
     sortBodyElements();
 });
