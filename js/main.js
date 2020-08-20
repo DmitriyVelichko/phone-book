@@ -181,10 +181,18 @@ $(document).ready(function () {
                 FileSize = 0;
             }
             if (FileSize < 2) {
-                data.append(fileName, file);
+                if (typeof file !== "undefined") {
+                    data.append(fileName, file);
+                }
             } else {
-                alert('Файл больше 2Мб!');
-                return false;
+                let blockPhoto = $('.blockPhoto');
+                let src = $(document).find('#modalImage').attr('src');
+                blockPhoto.find('#file1').val('');
+                if(src === '') {
+                    src = '/uploads/no_photo.jpg';
+                }
+                blockPhoto.find('#modalImage').attr('src', src);
+                $('#lblremphoto').attr('hidden', 'true');
             }
         }
 
@@ -271,6 +279,12 @@ $(document).ready(function () {
                     "        </div>\n" +
                     "    </div>\n" +
                     "</div>";
+                if (newContact === 'true') {
+                    newContact = true;
+                }
+                if (newContact === 'false') {
+                    newContact = false;
+                }
                 if (newContact) {
                     $('.mytable').append(template);
                     sortBodyElements();
@@ -427,6 +441,7 @@ $(document).ready(function () {
         }
     });
 
+    //Описание подсказки генерируется тут
     $(document).on('click', '.helptip', function (e) {
         let phoneDescs = $(this).find('label').html();
         phoneDescs = phoneDescs.replace(/[_\W]+/g, " ").split(" ");
@@ -442,8 +457,17 @@ $(document).ready(function () {
         helptip(this);
     });
 
+    //Кнопка удалить картинку
+    $(document).on('click', '#lblremphoto', function () {
+        let blockPhoto = $('.blockPhoto');
+        blockPhoto.find('#file1').val('');
+        blockPhoto.find('#modalImage').attr('src', '/uploads/no_photo.jpg');
+        $('#lblremphoto').attr('hidden', 'true');
+    });
+
     $("#phone").mask("8(999)999-99-99");
-    $("#email").inputmask("email");
+    $("#email").inputmask("email", {placeholder: ""});
+    $("#login").inputmask("email", {placeholder: ""});
 
     sortBodyElements();
 });
@@ -456,9 +480,9 @@ function helptip(t) {
     // Условимся: если ноль, то можно закрывать, а если единица, то нельзя
     helptip.v = 0;
     // Берем последний дочерний тег
-    var b = t.children[(t.children.length-1)];
+    var b = t.children[(t.children.length - 1)];
     // Если открыт, то закрываем
-    if (b.style.display=="block") helptipx();
+    if (b.style.display == "block") helptipx();
     else {
         // Закрываем все
         helptipx();
@@ -468,11 +492,12 @@ function helptip(t) {
         helptip.v = 1;
     }
 }
+
 // Функция закрывает все подсказки
 function helptipx() {
     // Если было нажатие для открытия подсказки, то закрывать нельзя
     // Поэтому проверяем:
-    if (helptip.v==1) {
+    if (helptip.v == 1) {
         // Разрешаем закрытие в будущем
         helptip.v = 0;
         // И выходим
@@ -481,9 +506,9 @@ function helptipx() {
     // Выбираем все теги с классом .helptip
     var s = document.querySelectorAll(".helptip");
     // и перебираем их циклом
-    for (var i=0; i < s.length; i++) {
+    for (var i = 0; i < s.length; i++) {
         // Скрываем последний дочерний тег
-        s[i].children[(s[i].children.length-1)].style.display = "none";
+        s[i].children[(s[i].children.length - 1)].style.display = "none";
     }
 }
 
@@ -508,34 +533,6 @@ function removeAllSortArrow(event) {
     });
 }
 
-// Сохранение картинки в форме (это не загрузка на сервер)
-function save() {
-    let f = file1.files[0];
-    let FileSize = f.size / 1024 / 1024; // in MB
-    if (FileSize > 2) {
-        alert("Файл больше 2Мб!");
-        return false;
-    }
-    var re = /(\.jpg|\.jpeg|\.png)$/i;
-    if (!re.exec(f.name)) {
-        alert("Этот тип файлов не поддерживается!");
-    }
-
-    if (f) {
-        modalImage.src = URL.createObjectURL(f);
-        localStorage.setItem('myImage', modalImage.src);
-        $('#lblremphoto').removeAttr('hidden');
-    }
-}
-
-//Кнопка удалить картинку
-function remImg() {
-    let blockPhoto = $('.blockPhoto');
-    blockPhoto.find('#file1').val('');
-    blockPhoto.find('#modalImage').attr('src', '/uploads/no_photo.jpg');
-    $('#lblremphoto').attr('hidden','true');
-}
-
 //Сортировка элементов
 function sortBodyElements(order = 'asc') {
     let result = $('.mytbody').sort(
@@ -554,4 +551,23 @@ function isNumber(num) {
     num = String(num);
     result = num.match(/(\d+)/g);
     return (result !== null) ? (result.length > 0) : false;
+}
+
+function autoloadimg() {
+    let f = file1.files[0];
+    let FileSize = f.size / 1024 / 1024; // in MB
+    if (FileSize > 2) {
+        alert("Файл больше 2Мб!");
+        return false;
+    }
+    var re = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!re.exec(f.name)) {
+        alert("Этот тип файлов не поддерживается!");
+    }
+
+    if (f) {
+        modalImage.src = URL.createObjectURL(f);
+        localStorage.setItem('myImage', modalImage.src);
+        $('#lblremphoto').removeAttr('hidden');
+    }
 }

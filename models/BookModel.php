@@ -40,7 +40,10 @@ class BookModel
     public function update($id, $userId, $data)
     {
         try {
-            $sql = "UPDATE book SET first_name=:first_name, last_name=:last_name, phone=:phone, email=:email, photo=:photo WHERE id=:id AND user_id=:user_id";
+            $sql = "UPDATE book 
+                    SET first_name=:first_name, last_name=:last_name, phone=:phone, email=:email, photo=:photo 
+                    WHERE id=:id 
+                    AND user_id=:user_id";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(":id", $id, PDO::PARAM_INT);
             $stmt->bindParam(":user_id", $userId, PDO::PARAM_INT);

@@ -33,7 +33,7 @@
                 <label for="email">Email</label>
             </div>
             <div class="col-sm">
-                <input type="text" id="email" name="email" value="" placeholder="_@_._">
+                <input type="text" id="email" name="email" value="" placeholder="user777@test.ru">
             </div>
         </div>
 
@@ -45,9 +45,8 @@
         <div class="row blockPhoto">
                 <div class="col-sm photomarg">
                     <label for="file1" id="lblphoto">Выбрать файл</label>
-                    <input type="file" id="file1" name="files[]" style="display: none;" accept="image/x-png,image/jpeg" value="" multiple/>
-                    <div onclick="save()" id="lblloadphoto">Загрузить</div>
-                    <div onclick="remImg()" id="lblremphoto">Удалить</div>
+                    <input type="file" id="file1" name="files[]" accept="image/x-png,image/jpeg" value="" multiple hidden onchange="autoloadimg()"/>
+                    <div id="lblremphoto">Удалить</div>
                     <img id="modalImage" src="/uploads/no_photo.jpg"/>
                 </div>
         </div>

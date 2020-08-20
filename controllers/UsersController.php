@@ -82,7 +82,7 @@ class UsersController
     {
         $data['recaptchaSiteKey'] = $this->recaptchaSiteKey;
         $data['recaptchaSecretKey'] = $this->recaptchaSecretKey;
-        
+
         if (empty($_POST['g-recaptcha-response'])) {
             $this->view('document', ['error' => 'Вы не прошли проверку на Recaptcha!']);
         }

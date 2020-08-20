@@ -17,11 +17,13 @@ class BookController
         $this->user = !empty($_SESSION['login']) ? (new UsersModel())->findByLogin($_SESSION['login']) : null;
 
         foreach ($_POST as $key => $val) {
-            $str = $val;
-            $str = trim($str);
-            $str = stripslashes($str);
-            $str = htmlspecialchars($str);
-            $_POST[$key] = $str;
+            if(!is_array($val)) {
+                $str = $val;
+                $str = trim($str);
+                $str = stripslashes($str);
+                $str = htmlspecialchars($str);
+                $_POST[$key] = $str;
+            }
         }
     }
 
@@ -67,7 +69,7 @@ class BookController
             'phone' => $item['phone'],
             'email' => $item['email'],
             'photo' => $item['photo'],
-            'newContact' => (bool)$data['newContact']
+            'newContact' => $data['newContact']
         ]);
     }
 

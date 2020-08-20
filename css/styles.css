@@ -257,7 +257,7 @@ a {
     display: block;
 }
 
-#lblloadphoto, #lblphoto, #lblremphoto {
+#lblphoto, #lblremphoto {
     display: inline-block;
     font-family: arial, sans-serif;
     font-size: 11px;
@@ -273,14 +273,14 @@ a {
     transition: all .218s ease 0s;
 }
 
-#lblloadphoto:hover, #lblphoto:hover, #lblremphoto:hover {
+#lblphoto:hover, #lblremphoto:hover {
     color: rgb(24, 24, 24);
     border: 1px solid rgb(198, 198, 198);
     background: #f7f7f7 linear-gradient(#f7f7f7, #f1f1f1);
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
 }
 
-#lblloadphoto:active, #lblphoto:active, #lblremphoto:active {
+#lblphoto:active, #lblremphoto:active {
     color: rgb(51, 51, 51);
     border: 1px solid rgb(204, 204, 204);
     background: rgb(238, 238, 238) linear-gradient(rgb(238, 238, 238), rgb(224, 224, 224));
@@ -291,7 +291,7 @@ a {
     display: none;
 }
 
-#lblloadphoto {
+#lblremphoto {
     float: right;
 }
 
