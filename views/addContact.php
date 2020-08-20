@@ -25,7 +25,7 @@
                 <label for="phone">Телефон</label>
             </div>
             <div class="col-sm">
-                <input type="tel" id="phone" name="phone" value="" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" placeholder="8(___)-___-__-__">
+                <input type="tel" id="phone" name="phone" value="" pattern="^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" placeholder="+7(___)-___-__-__">
             </div>
         </div>
         <div class="row">

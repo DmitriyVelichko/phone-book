@@ -298,7 +298,9 @@ $(document).ready(function () {
                         if(inputid === 'mytbodyphone'+mytbody.id) {
                             $(document).find('#'+inputid).siblings('.helptip').find('label').text(arr4[index]) //обновить label для телефона
                         } else {
-                            $(document).find('#'+inputid).siblings('label').text(arr4[index]); //обновить label
+                            if(inputid !== 'mytbodyid'+mytbody.id){
+                                $(document).find('#'+inputid).siblings('label').text(arr4[index]); //обновить label
+                            }
                         }
                     })
                 }
