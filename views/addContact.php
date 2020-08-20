@@ -45,7 +45,7 @@
         <div class="row blockPhoto">
                 <div class="col-sm photomarg">
                     <label for="file1" id="lblphoto">Выбрать файл</label>
-                    <input type="file" id="file1" name="files[]" style="display: none;" value="" multiple/>
+                    <input type="file" id="file1" name="files[]" style="display: none;" accept="image/x-png,image/jpeg" value="" multiple/>
                     <div onclick="save()" id="lblloadphoto">Загрузить</div>
                     <div onclick="remImg()" id="lblremphoto">Удалить</div>
                     <img id="modalImage" src="/uploads/no_photo.jpg"/>

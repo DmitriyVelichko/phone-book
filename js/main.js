@@ -128,7 +128,7 @@ $(document).ready(function () {
             })
 
             let id = arr2[0];
-            var data = new FormData();
+            let data = new FormData();
             data.append('removeItem', true);
             data.append('id', id);
             data.append('ajax', 1);
@@ -151,20 +151,19 @@ $(document).ready(function () {
     $('#modalAddContact').on('submit', function (e) {
         e.preventDefault()
 
-        var form = $(this);
-        var data = new FormData();
+        let form = $(this);
+        let data = new FormData();
 
         // Сбор данных из обычных полей
         form.find(':input[name]').not('[type="file"]').each(function () {
-            var field = $(this);
+            let field = $(this);
             data.append(field.attr('name'), field.val());
         });
         data.append('newContact', newContact);
 
-
-        var filesField = form.find('input[type="file"]');
-        var fileName = filesField.attr('name');
-        var file = filesField.prop('files')[0];
+        let filesField = form.find('input[type="file"]');
+        let fileName = filesField.attr('name');
+        let file = filesField.prop('files')[0];
 
         if (
             $(document.getElementById('file1')).val() !== ''
@@ -175,7 +174,18 @@ $(document).ready(function () {
                 $(document.getElementById('modalImage')).attr('src') === "/uploads/no_photo.jpg"
             )
         ) {
-            data.append(fileName, file);
+            let FileSize;
+            if (typeof file !== "undefined") {
+                FileSize = file.size / 1024 / 1024; // in MB
+            } else {
+                FileSize = 0;
+            }
+            if (FileSize < 2) {
+                data.append(fileName, file);
+            } else {
+                alert('Файл больше 2Мб!');
+                return false;
+            }
         }
 
         if (
@@ -184,6 +194,11 @@ $(document).ready(function () {
             $(document.getElementById('file1')).val() === ''
         ) {
             data.append('photo', $(document.getElementById('modalImage')).attr('src').replace("/uploads/", ""));
+        }
+
+        if ($('#first_name').val() === '' && $('#last_name').val() === '' && $('#phone').val() === '' && $('#email').val() === '') {
+            alert('Введите данные!');
+            return false;
         }
 
         // Отправка данных
@@ -216,23 +231,31 @@ $(document).ready(function () {
                 }
                 mytbodyid = ($('.mytbody').length > 0) ? $('.mytbody').length + 1 : 1;
                 let template = "<div class=\"row mytbody\" id=\"mytbody" + mytbody.id + "\" data-sort=\"" + dataSort + "\">\n" +
-                    "    <div class=\"col-sm mytr trid\" style=\"max-width: 71px\">\n"+ mytbodyid +
-                    "        <input type=\"text\" value=\"" + mytbody.id + "\" hidden>\n" +
+                    "    <div class=\"col-sm mytr trid\" style=\"max-width: 71px\">\n" +
+                    "        <label for=\"mytbodyid" + mytbody.id + "\">" + mytbodyid + "</label>\n" +
+                    "        <input id=\"mytbodyid" + mytbody.id + "\" name=\"mytbodyid\" type=\"text\" value=\"" + mytbody.id + "\" readonly hidden>\n" +
                     "    </div>\n" +
                     "    <div class=\"col-sm mytr trfirstname\">\n" +
-                    "        <input type=\"text\" value=\"" + mytbody.first_name + "\" readonly>\n" +
+                    "        <label for=\"mytbodyfirstname" + mytbody.id + "\">" + mytbody.first_name + "</label>\n" +
+                    "        <input id=\"mytbodyfirstname" + mytbody.id + "\" name=\"mytbodyfirstname\" type=\"text\" value=\"" + mytbody.first_name + "\" readonly hidden>\n" +
                     "    </div>\n" +
                     "    <div class=\"col-sm mytr trlast_name\">\n" +
-                    "        <input type=\"text\" value=\"" + mytbody.last_name + "\" readonly>\n" +
+                    "        <label for=\"mytbodylastname" + mytbody.id + "\">" + mytbody.last_name + "</label>\n" +
+                    "        <input id=\"mytbodylastname" + mytbody.id + "\" name=\"mytbodylastname\" type=\"text\" value=\"" + mytbody.last_name + "\" readonly hidden>\n" +
                     "    </div>\n" +
                     "    <div class=\"col-sm mytr trphone\">\n" +
-                    "        <input type=\"text\" value=\"" + mytbody.phone + "\" readonly>\n" +
+                    "        <div class=\"helptip\" title=\"Перевод\">\n" +
+                    "            <label for=\"mytbodyphone" + mytbody.id + "\">" + mytbody.phone + "</label>\n" +
+                    "            <div title=\"Закрыть\" class=\"mytbodyphonedescription\"></div>\n" +
+                    "        </div>\n" +
+                    "        <input id=\"mytbodyphone" + mytbody.id + "\" name=\"mytbodyphone\" type=\"text\" value=\"" + mytbody.phone + "\" readonly hidden>\n" +
                     "    </div>\n" +
                     "    <div class=\"col-sm mytr tremail\">\n" +
-                    "        <input type=\"text\" value=\"" + mytbody.email + "\" readonly>\n" +
+                    "        <label for=\"mytbodyemail" + mytbody.id + "\">" + mytbody.email + "</label>\n" +
+                    "        <input id=\"mytbodyemail" + mytbody.id + "\" name=\"mytbodyemail\" type=\"text\" value=\"" + mytbody.email + "\" readonly hidden>\n" +
                     "    </div>\n" +
                     "    <div class=\"col-sm mytr trphoto\">\n" +
-                    "        <input type=\"text\" class=\"bodyImageName\" value=\"" + mytbody.photo + "\" style=\"display: none\">\n" +
+                    "        <input id=\"mytbodyimagename" + mytbody.id + "\" name=\"mytbodyimagename\" type=\"text\" class=\"bodyImageName\" value=\"" + mytbody.photo + "\" readonly hidden>\n" +
                     "        <div class=\"image__wrapper\">\n" +
                     "            <img src=\"/uploads/" + mytbody.photo + "\" class=\"minimized bodyImage\" alt=\"клик для увеличения\"/>\n" +
                     "        </div>\n" +
@@ -286,7 +309,7 @@ $(document).ready(function () {
 
     // Для увеличения картинки по клику
     $(document).on('click', '.minimized', function (event) {
-        var i_path = $(this).attr('src');
+        let i_path = $(this).attr('src');
         $('body').append('<div id="overlay"></div><div id="magnify"><img src="' + i_path + '"><div id="close-popup"><i></i></div></div>');
         let fixHeight = $(window).height();
 
@@ -393,9 +416,9 @@ $(document).ready(function () {
             //Это перебор столбика инпутов. Нужно заменить дата атрибуты если изменилось поле сортировки
             elements.each(function (index, value) {
                 valElem = $(value).val();
-                if($('.active').attr('data-field') === 'trphone') {
+                if ($('.active').attr('data-field') === 'trphone') {
                     //Сортировка для телефона (нужно удалить скобочки и другие символы)
-                    valElem = $(value).val().replace(/\D+/g,"");
+                    valElem = $(value).val().replace(/\D+/g, "");
                 }
                 $(value).closest('.mytbody').attr('data-sort', valElem);//Меняю дата атрибут, так как по нему сортирую
             })
@@ -404,11 +427,65 @@ $(document).ready(function () {
         }
     });
 
+    $(document).on('click', '.helptip', function (e) {
+        let phoneDescs = $(this).find('label').html();
+        phoneDescs = phoneDescs.replace(/[_\W]+/g, " ").split(" ");
+        let key;
+        let result = '';
+
+        for (key in phoneDescs) {
+            let str = rubles(phoneDescs[key]);
+            result = result + str;
+        }
+
+        $(this).find('.mytbodyphonedescription').html('').append(result);
+        helptip(this);
+    });
+
     $("#phone").mask("8(999)999-99-99");
     $("#email").inputmask("email");
 
     sortBodyElements();
 });
+
+// Основная функция, передаем в нее обрабатываемый тег
+// или this (для текущего тега)
+function helptip(t) {
+    // Разрешаем закрытие подсказок
+    // Создаем постоянную переменную этой функции для этих целей
+    // Условимся: если ноль, то можно закрывать, а если единица, то нельзя
+    helptip.v = 0;
+    // Берем последний дочерний тег
+    var b = t.children[(t.children.length-1)];
+    // Если открыт, то закрываем
+    if (b.style.display=="block") helptipx();
+    else {
+        // Закрываем все
+        helptipx();
+        // Открываем текущий
+        b.style.display = "block";
+        // Запрещаем закрытие подсказки вызванного последующими событиями
+        helptip.v = 1;
+    }
+}
+// Функция закрывает все подсказки
+function helptipx() {
+    // Если было нажатие для открытия подсказки, то закрывать нельзя
+    // Поэтому проверяем:
+    if (helptip.v==1) {
+        // Разрешаем закрытие в будущем
+        helptip.v = 0;
+        // И выходим
+        return;
+    }
+    // Выбираем все теги с классом .helptip
+    var s = document.querySelectorAll(".helptip");
+    // и перебираем их циклом
+    for (var i=0; i < s.length; i++) {
+        // Скрываем последний дочерний тег
+        s[i].children[(s[i].children.length-1)].style.display = "none";
+    }
+}
 
 //Удаляет все hidden и active перед активацией конкретной колонки
 function removeAllSortArrow(event) {
@@ -434,9 +511,20 @@ function removeAllSortArrow(event) {
 // Сохранение картинки в форме (это не загрузка на сервер)
 function save() {
     let f = file1.files[0];
+    let FileSize = f.size / 1024 / 1024; // in MB
+    if (FileSize > 2) {
+        alert("Файл больше 2Мб!");
+        return false;
+    }
+    var re = /(\.jpg|\.jpeg|\.png)$/i;
+    if (!re.exec(f.name)) {
+        alert("Этот тип файлов не поддерживается!");
+    }
+
     if (f) {
         modalImage.src = URL.createObjectURL(f);
         localStorage.setItem('myImage', modalImage.src);
+        $('#lblremphoto').removeAttr('hidden');
     }
 }
 
@@ -445,14 +533,15 @@ function remImg() {
     let blockPhoto = $('.blockPhoto');
     blockPhoto.find('#file1').val('');
     blockPhoto.find('#modalImage').attr('src', '/uploads/no_photo.jpg');
+    $('#lblremphoto').attr('hidden','true');
 }
 
 //Сортировка элементов
 function sortBodyElements(order = 'asc') {
-    var result = $('.mytbody').sort(
+    let result = $('.mytbody').sort(
         function (a, b) {
-            var contentA = isNumber(parseInt($(a).data('sort'))) ? parseInt($(a).data('sort')) : $(a).data('sort').toLowerCase();
-            var contentB = isNumber(parseInt($(b).data('sort'))) ? parseInt($(b).data('sort')) : $(b).data('sort').toLowerCase();
+            let contentA = isNumber(parseInt($(a).data('sort'))) ? parseInt($(a).data('sort')) : $(a).data('sort').toLowerCase();
+            let contentB = isNumber(parseInt($(b).data('sort'))) ? parseInt($(b).data('sort')) : $(b).data('sort').toLowerCase();
 
             return ((order === 'asc') ? 1 : -1) * ((contentA < contentB) ? -1 : (contentA > contentB) ? 1 : 0);
         }
@@ -466,4 +555,3 @@ function isNumber(num) {
     result = num.match(/(\d+)/g);
     return (result !== null) ? (result.length > 0) : false;
 }
-

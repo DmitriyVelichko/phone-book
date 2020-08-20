@@ -39,6 +39,7 @@
     </div>
 </div>
 
+<script src="/lib/rubles.js"></script>
 <script src="/js/jquery351.js"></script>
 <script src="/lib/maskedinput/src/jquery.maskedinput.js"></script>
 <script src="/lib/inputmask.js"></script>

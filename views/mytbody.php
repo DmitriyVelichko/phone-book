@@ -2,23 +2,30 @@
 <? foreach ($content as $key => $item) { ?>
     <div class="row mytbody" id="mytbody<?= $item['id'] ?>" data-sort="<?= $item['id'] ?>">
         <div class="col-sm mytr trid" style="max-width: 71px">
-            <?= $i ?>
-            <input type="text" value="<?= $item['id'] ?>" hidden>
+            <label for="mytbodyid<?= $item['id'] ?>"><?= $i ?></label>
+            <input id="mytbodyid<?= $item['id'] ?>" name="mytbodyid" type="text" value="<?= $item['id'] ?>"readonly hidden>
         </div>
         <div class="col-sm mytr trfirstname">
-            <input type="text" value="<?= $item['first_name'] ?>" readonly>
+            <label for="mytbodyfirstname<?= $item['id'] ?>"><?= $item['first_name'] ?></label>
+            <input id="mytbodyfirstname<?= $item['id'] ?>" name="mytbodyfirstname" type="text" value="<?= $item['first_name'] ?>" readonly hidden>
         </div>
         <div class="col-sm mytr trlastname">
-            <input type="text" value="<?= $item['last_name'] ?>" readonly>
+            <label for="mytbodylastname<?= $item['id'] ?>"><?= $item['last_name'] ?></label>
+            <input id="mytbodylastname<?= $item['id'] ?>" name="mytbodylastname" type="text" value="<?= $item['last_name'] ?>" readonly hidden>
         </div>
         <div class="col-sm mytr trphone">
-            <input type="text" value="<?= $item['phone'] ?>" readonly>
+            <div class="helptip" title="Перевод">
+                <label for="mytbodyphone<?= $item['id'] ?>"><?= $item['phone'] ?></label>
+                <div title="Закрыть" class="mytbodyphonedescription"></div>
+            </div>
+            <input id="mytbodyphone<?= $item['id'] ?>" name="mytbodyphone" type="text" value="<?= $item['phone'] ?>" readonly hidden>
         </div>
         <div class="col-sm mytr tremail">
-            <input type="text" value="<?= $item['email'] ?>" readonly>
+            <label for="mytbodyemail<?= $item['id'] ?>"><?= $item['email'] ?></label>
+            <input id="mytbodyemail<?= $item['id'] ?>" name="mytbodyemail" type="text" value="<?= $item['email'] ?>" readonly hidden>
         </div>
         <div class="col-sm mytr trphoto">
-            <input type="text" class="bodyImageName" value="<?= $item['photo'] ?>" style="display: none">
+            <input id="mytbodyimagename<?= $item['id'] ?>" name="mytbodyimagename" type="text" class="bodyImageName" value="<?= $item['photo'] ?>" readonly hidden>
             <div class="image__wrapper">
                 <img <? if (!empty($item['photo'])): ?>
                     src="/uploads/<?= $item['photo'] ?>"
