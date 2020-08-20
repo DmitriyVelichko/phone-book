@@ -18,6 +18,9 @@
             <div class="error" hidden><?= $error ?></div>
 
             <button type="submit" class="authbtn">Войти</button>
+
+            <div class="g-recaptcha" data-sitekey="<?=$recaptchaSiteKey?>"></div>
+            <div class="text-danger" id="recaptchaError"></div>
         </div>
 
         <div class="container signup">

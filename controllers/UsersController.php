@@ -80,6 +80,12 @@ class UsersController
 
     public function auth($data)
     {
+        $data['recaptchaSiteKey'] = $this->recaptchaSiteKey;
+        $data['recaptchaSecretKey'] = $this->recaptchaSecretKey;
+        
+        if (empty($_POST['g-recaptcha-response'])) {
+            $this->view('document', ['error' => 'Вы не прошли проверку на Recaptcha!']);
+        }
         $data['auth'] = true;
         $token = md5('phone-book' . $_POST['login'] . $_POST['pass']);
         $user = $this->model->findByLoginAndPass($data['login'], $token);
