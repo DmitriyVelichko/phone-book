@@ -16,6 +16,7 @@
     <link href="/lib/fontawesome-free-5.14.0-web/css/brands.css" rel="stylesheet">
     <link href="/lib/fontawesome-free-5.14.0-web/css/solid.css" rel="stylesheet">
 
+    <script type="application/javascript" src="/lib/recaptcha.js"></script>
 </head>
 <body>
 
@@ -50,6 +51,7 @@
 <script defer src="/lib/fontawesome-free-5.14.0-web/js/brands.js"></script>
 <script defer src="/lib/fontawesome-free-5.14.0-web/js/solid.js"></script>
 <script defer src="/lib/fontawesome-free-5.14.0-web/js/fontawesome.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=<?=$recaptchaSiteKey?>"></script>
 
 </body>
 </html>

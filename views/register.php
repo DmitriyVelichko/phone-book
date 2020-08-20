@@ -19,6 +19,9 @@
             <div class="error" hidden><?= $error ?></div>
             <p>Создавая учетную запись, вы соглашаетесь с нашими условиями и конфиденциальностью.</p>
             <button type="submit" class="registerbtn">Зарегистрироваться</button>
+
+            <div class="g-recaptcha" data-sitekey="<?=$recaptchaSiteKey?>"></div>
+            <div class="text-danger" id="recaptchaError"></div>
         </div>
 
         <div class="container signin">
