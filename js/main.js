@@ -293,7 +293,13 @@ $(document).ready(function () {
                     let arr4 = [mytbody.id, mytbody.first_name, mytbody.last_name, mytbody.phone, mytbody.email, mytbody.photo];
 
                     $.each(arr3, function (index, elem) {
-                        $($(elem)).val(arr4[index])
+                        let inputid = $(elem).attr('id');
+                        $(document).find('#'+inputid).val(arr4[index]); //обновить input поля
+                        if(inputid === 'mytbodyphone'+mytbody.id) {
+                            $(document).find('#'+inputid).siblings('.helptip').find('label').text(arr4[index]) //обновить label для телефона
+                        } else {
+                            $(document).find('#'+inputid).siblings('label').text(arr4[index]); //обновить label
+                        }
                     })
                 }
                 $('#myModal').animate({opacity: 0}, 198, function () {
@@ -465,7 +471,7 @@ $(document).ready(function () {
         $('#lblremphoto').attr('hidden', 'true');
     });
 
-    $("#phone").mask("8(999)999-99-99");
+    $("#phone").mask("+7(999)999-99-99");
     $("#email").inputmask("email", {placeholder: ""});
     $("#login").inputmask("email", {placeholder: ""});
 
