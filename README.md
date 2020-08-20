@@ -64,3 +64,22 @@ COLLATE='utf8mb4_unicode_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=20
 ;
+
+
+CREATE TABLE `system` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`key` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8mb4_unicode_ci',
+	`value` VARCHAR(255) NOT NULL DEFAULT '' COLLATE 'utf8mb4_unicode_ci',
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
+
+Добавить в таблицу систем 2 строки:
+1) "ключ" = recaptcha_site_key, "значение" = "ваш уникальный ключ сайта"
+2) "ключ" = recaptcha_secret_key, "значение" = "ваш уникальный секретный ключ"
+
+Ключи нужно сгенерировать в вашем личном кабинете google https://www.google.com/u/1/recaptcha/admin/create. 
+Для этого нужен аккаунт гугл. Если у вас его нет, то необходимо зарегистрироваться.
