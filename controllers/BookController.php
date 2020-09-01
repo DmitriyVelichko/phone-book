@@ -93,7 +93,7 @@ class BookController
     public function view($template, $args)
     {
         if ($_POST['ajax']) {
-            echo json_encode($args);
+                echo json_encode($args);
             die;
         }
         echo ViewHelper::render($template, $args);
